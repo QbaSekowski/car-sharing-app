@@ -1,1 +1,3 @@
-# car-sharing-app
+# Car Sharing App (in development)
+
+There is a car sharing service in your city, where you can rent cars and pay for your usage using cash, depending on the duration of your rental. The problem is, the system for tracking cars, rentals, users, and payments in the car sharing service is outdated - everything is managed manually and all records are kept on paper. There is no way to check the availability of specific cars in the service. Additionally, you can only make payments with cash; there is no support for credit cards. The car sharing service administration has no way of knowing who returned the car on time and who did not.
