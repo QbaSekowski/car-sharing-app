@@ -4,7 +4,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
-import mate.academy.carsharingapp.model.Car;
+import mate.academy.carsharingapp.dto.car.CarDto;
+import mate.academy.carsharingapp.dto.car.CreateCarRequestDto;
 import mate.academy.carsharingapp.service.car.CarService;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -28,13 +29,13 @@ public class CarController {
     @GetMapping("/{id}")
     @Operation(summary = "Get a car by ID", description = "Get all details of a specific car "
             + "by providing its ID")
-    public Car getCarById(@PathVariable Long id) {
+    public CarDto getCarById(@PathVariable Long id) {
         return carService.findById(id);
     }
 
     @GetMapping
     @Operation(summary = "Get all cars", description = "Get a list of all available cars from DB")
-    public List<Car> getAllCars(Pageable pageable) {
+    public List<CarDto> getAllCars(Pageable pageable) {
         return carService.findAll(pageable);
     }
 
@@ -42,16 +43,17 @@ public class CarController {
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Create a new car", description = "Create a new car by providing "
             + "its model, type, brand, number of these cars in inventory and daily fee")
-    public Car createCar(@RequestBody Car car) {
-        return carService.save(car);
+    public CarDto createCar(@RequestBody CreateCarRequestDto createCarRequestDto) {
+        return carService.save(createCarRequestDto);
     }
 
     @PutMapping("/{id}")
     @Operation(summary = "Update a car by ID",
             description = "Update a car with given ID by providing its "
                     + "model, type, brand, number of these cars in inventory and daily fee")
-    public Car updateCar(@PathVariable Long id, @RequestBody Car car) {
-        return carService.updateById(id, car);
+    public CarDto updateCar(@PathVariable Long id,
+                            @RequestBody CreateCarRequestDto createCarRequestDto) {
+        return carService.updateById(id, createCarRequestDto);
     }
 
     @DeleteMapping("/{id}")

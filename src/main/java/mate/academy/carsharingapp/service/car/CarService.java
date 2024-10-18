@@ -1,17 +1,18 @@
 package mate.academy.carsharingapp.service.car;
 
 import java.util.List;
-import mate.academy.carsharingapp.model.Car;
+import mate.academy.carsharingapp.dto.car.CarDto;
+import mate.academy.carsharingapp.dto.car.CreateCarRequestDto;
 import org.springframework.data.domain.Pageable;
 
 public interface CarService {
-    Car findById(Long id);
+    CarDto findById(Long id);
 
-    List<Car> findAll(Pageable pageable);
+    List<CarDto> findAll(Pageable pageable);
 
-    Car save(Car car);
+    CarDto save(CreateCarRequestDto createCarRequestDto);
 
-    Car updateById(Long id, Car car);
+    CarDto updateById(Long id, CreateCarRequestDto createCarRequestDto);
 
     void deleteById(Long id);
 }
