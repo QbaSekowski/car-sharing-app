@@ -30,13 +30,13 @@ public class CarController {
     @Operation(summary = "Get a car by ID", description = "Get all details of a specific car "
             + "by providing its ID")
     public CarDto getCarById(@PathVariable Long id) {
-        return carService.findById(id);
+        return carService.getCarById(id);
     }
 
     @GetMapping
     @Operation(summary = "Get all cars", description = "Get a list of all available cars from DB")
     public List<CarDto> getAllCars(Pageable pageable) {
-        return carService.findAll(pageable);
+        return carService.getAllCars(pageable);
     }
 
     @PostMapping
@@ -44,7 +44,7 @@ public class CarController {
     @Operation(summary = "Create a new car", description = "Create a new car by providing "
             + "its model, type, brand, number of these cars in inventory and daily fee")
     public CarDto createCar(@RequestBody CreateCarRequestDto createCarRequestDto) {
-        return carService.save(createCarRequestDto);
+        return carService.createCar(createCarRequestDto);
     }
 
     @PutMapping("/{id}")

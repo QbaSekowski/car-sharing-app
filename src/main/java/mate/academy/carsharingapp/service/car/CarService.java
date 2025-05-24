@@ -6,11 +6,11 @@ import mate.academy.carsharingapp.dto.car.CreateCarRequestDto;
 import org.springframework.data.domain.Pageable;
 
 public interface CarService {
-    CarDto findById(Long id);
+    CarDto getCarById(Long id);
 
-    List<CarDto> findAll(Pageable pageable);
+    List<CarDto> getAllCars(Pageable pageable);
 
-    CarDto save(CreateCarRequestDto createCarRequestDto);
+    CarDto createCar(CreateCarRequestDto createCarRequestDto);
 
     CarDto updateById(Long id, CreateCarRequestDto createCarRequestDto);
 

@@ -20,13 +20,13 @@ public class CarServiceImpl implements CarService {
     private final CarMapper carMapper;
 
     @Override
-    public CarDto findById(Long id) {
+    public CarDto getCarById(Long id) {
         return carMapper.toDto(carRepository.findById(id).orElseThrow(
                 () -> new EntityNotFoundException("Car with id: " + id + " not found")));
     }
 
     @Override
-    public List<CarDto> findAll(Pageable pageable) {
+    public List<CarDto> getAllCars(Pageable pageable) {
         return carRepository.findAll(pageable).stream()
                 .map(carMapper::toDto)
                 .toList();
@@ -34,7 +34,7 @@ public class CarServiceImpl implements CarService {
 
     @Transactional
     @Override
-    public CarDto save(CreateCarRequestDto createCarRequestDto) {
+    public CarDto createCar(CreateCarRequestDto createCarRequestDto) {
         Car car = carMapper.toModel(createCarRequestDto);
         Car savedCar = carRepository.save(car);
         return carMapper.toDto(savedCar);
