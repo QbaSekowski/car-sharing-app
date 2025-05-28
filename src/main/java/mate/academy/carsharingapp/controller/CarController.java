@@ -6,6 +6,7 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import mate.academy.carsharingapp.dto.car.CarDto;
 import mate.academy.carsharingapp.dto.car.CreateCarRequestDto;
+import mate.academy.carsharingapp.dto.car.UpdateCarRequestDto;
 import mate.academy.carsharingapp.service.car.CarService;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -52,8 +53,8 @@ public class CarController {
             description = "Update a car with given ID by providing its "
                     + "model, type, brand, number of these cars in inventory and daily fee")
     public CarDto updateCar(@PathVariable Long id,
-                            @RequestBody CreateCarRequestDto createCarRequestDto) {
-        return carService.updateById(id, createCarRequestDto);
+                            @RequestBody UpdateCarRequestDto updateCarRequestDto) {
+        return carService.updateById(id, updateCarRequestDto);
     }
 
     @DeleteMapping("/{id}")
