@@ -54,8 +54,7 @@ public class CarServiceImpl implements CarService {
     @Override
     public void deleteById(Long id) {
         Car car = carRepository.findById(id).orElseThrow(
-                () -> new EntityNotFoundException("Car by id "
-                + id + " not found"));
+                () -> new EntityNotFoundException("Car by id " + id + " not found"));
         carRepository.deleteById(car.getId());
     }
 }
