@@ -25,4 +25,25 @@ public class UserController {
                                @RequestBody @Valid UserRoleUpdateDto userRoleUpdateDto) {
         //userService.updateUserRole(id, userRoleUpdateDto);
     }
+
+    /*
+    @GetMapping("/me")
+    @Operation(summary = "Retrieve user's info",
+            description = "Retrieve user's info")
+    public UserResponseDto getUserInfo(Authentication authentication) {
+        return userService.getUserInfo(
+                userService.getUserFromAuthentication(authentication).getId());
+    }
+
+
+    @PutMapping("/me")
+    @Operation(summary = "Update user's info",
+            description = "Update user's info")
+    public UserResponseDto updateUserInfo(Authentication authentication,
+                                          @RequestBody @Valid UserRegistrationRequestDto userRegistrationRequestDto) {
+        return userService.updateUserInfo(
+                userService.getUserFromAuthentication(
+                        authentication).getId(), userRegistrationRequestDto);
+    }
+     */
 }
