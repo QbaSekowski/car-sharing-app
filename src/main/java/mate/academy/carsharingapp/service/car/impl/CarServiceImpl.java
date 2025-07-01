@@ -8,7 +8,7 @@ import mate.academy.carsharingapp.dto.car.CreateCarRequestDto;
 import mate.academy.carsharingapp.dto.car.UpdateCarRequestDto;
 import mate.academy.carsharingapp.mapper.CarMapper;
 import mate.academy.carsharingapp.model.Car;
-import mate.academy.carsharingapp.repository.car.CarRepository;
+import mate.academy.carsharingapp.repository.CarRepository;
 import mate.academy.carsharingapp.service.car.CarService;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
