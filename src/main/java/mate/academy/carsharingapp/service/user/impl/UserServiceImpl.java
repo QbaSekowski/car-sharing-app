@@ -15,6 +15,7 @@ import mate.academy.carsharingapp.service.user.UserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -25,9 +26,16 @@ public class UserServiceImpl implements UserService {
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
 
+    @Transactional
     @Override
     public void updateUserRole(Long id, UserRoleUpdateDto userRoleUpdateDto) {
-
+        User user = userRepository.findById(id).orElseThrow(
+                () -> new EntityNotFoundException("User with id " + id + " not found"));
+        Role role = roleRepository.findRoleByName(userRoleUpdateDto.name()).orElseThrow(
+                () -> new EntityNotFoundException("Role with name "
+                        + userRoleUpdateDto.name() + " not found"));
+        user.getRoles().add(role);
+        userMapper.toDto(userRepository.save(user));
     }
 
     @Override
@@ -37,18 +45,21 @@ public class UserServiceImpl implements UserService {
         return userMapper.toDto(user);
     }
 
+    @Transactional
     @Override
     public UserResponseDto updateUserInfo(Long id, UserRegistrationRequestDto userRegistrationRequestDto) {
         return null;
     }
 
+    @Transactional
     @Override
-    public UserResponseDto register(UserRegistrationRequestDto userRegistrationRequestDto) throws RegistrationException {
+    public UserResponseDto register(UserRegistrationRequestDto userRegistrationRequestDto)
+            throws RegistrationException {
         return null;
     }
 
     @Override
     public User getUserFromAuthentication(Authentication authentication) {
-        return null;
+        return (User) authentication.getPrincipal();
     }
 }
