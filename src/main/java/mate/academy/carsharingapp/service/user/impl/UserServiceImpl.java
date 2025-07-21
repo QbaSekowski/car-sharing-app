@@ -1,5 +1,6 @@
 package mate.academy.carsharingapp.service.user.impl;
 
+import java.util.Set;
 import lombok.RequiredArgsConstructor;
 import mate.academy.carsharingapp.dto.user.UserRegistrationRequestDto;
 import mate.academy.carsharingapp.dto.user.UserResponseDto;
@@ -48,14 +49,27 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public UserResponseDto updateUserInfo(Long id, UserRegistrationRequestDto userRegistrationRequestDto) {
-        return null;
+        User user = userRepository.findById(id).orElseThrow(
+                () -> new EntityNotFoundException("User with id " + id + " not found"));
+        User updatedUser = userMapper.updateUser(userRegistrationRequestDto, user);
+        updatedUser.setPassword(user.getPassword());
+        updatedUser.setRoles(user.getRoles());
+        return userMapper.toDto(userRepository.save(updatedUser));
     }
 
     @Transactional
     @Override
     public UserResponseDto register(UserRegistrationRequestDto userRegistrationRequestDto)
             throws RegistrationException {
-        return null;
+        if (userRepository.findByEmail(userRegistrationRequestDto.email()).isPresent()) {
+            throw new RegistrationException("Email address already in use");
+        }
+        User user = userMapper.toModel(userRegistrationRequestDto);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        Role defaultRole = roleRepository.findRoleByName(DEFAULT_ROLE_NAME)
+                .orElseThrow(() -> new RegistrationException("Can't find default role"));
+        user.setRoles(Set.of(defaultRole));
+        return userMapper.toDto(userRepository.save(user));
     }
 
     @Override
