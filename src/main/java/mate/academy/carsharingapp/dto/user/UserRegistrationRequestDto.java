@@ -2,10 +2,11 @@ package mate.academy.carsharingapp.dto.user;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import mate.academy.carsharingapp.validation.FieldMatch;
 import org.hibernate.validator.constraints.Length;
 
-/* @FieldMatch(firstField = "password", secondField = "repeatPassword",
-        message = "The passwords must match") */
+@FieldMatch(firstField = "password", secondField = "repeatPassword",
+        message = "The passwords must match")
 public record UserRegistrationRequestDto(
         @Email
         @NotBlank(message = "email may not be blank")
